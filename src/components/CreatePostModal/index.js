@@ -18,6 +18,11 @@ export default function CreatePostModal() {
 
   const onClose = React.useCallback(() => {
     dispatch(hideModal())
+    setData({
+      title: '',
+      content: '',
+      attachment: ''
+    })
   }, [dispatch])
 
   const onSubmit = React.useCallback(() => {

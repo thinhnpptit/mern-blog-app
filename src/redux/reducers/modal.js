@@ -1,7 +1,7 @@
 import { INIT_STATE } from '../../constant'
 import { getType, showModal, hideModal } from '../actions'
 
-export default function postReducer(state = INIT_STATE.modal, action) {
+export default function modalReducer(state = INIT_STATE.modal, action) {
   switch (action.type) {
     case getType(showModal):
       return {

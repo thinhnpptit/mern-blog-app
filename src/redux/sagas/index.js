@@ -17,15 +17,27 @@ function* createPostSaga(action) {
   try {
     const post = yield call(api.createPost, action.payload)
     console.log('[createPostSaga]', post)
-    yield put(actions.createPost.createPostSuccess(post))
+    yield put(actions.createPost.createPostSuccess(post.data))
   } catch (err) {
     yield put(actions.createPost.createPostFailure(err))
+  }
+}
+
+function* updatePostSaga(action) {
+  try {
+    console.log('updatePostSaga', { action })
+    const updatedPost = yield call(api.updatePost, action.payload)
+    console.log('[updatePostSaga]', updatedPost)
+    yield put(actions.updatePost.updatePostSuccess(updatedPost.data))
+  } catch (err) {
+    yield put(actions.updatePost.updatePostFailure(err))
   }
 }
 
 function* mySaga() {
   yield takeLatest(actions.getPosts.getPostsRequest, fetchPostsSaga)
   yield takeLatest(actions.createPost.createPostRequest, createPostSaga)
+  yield takeLatest(actions.updatePost.updatePostRequest, updatePostSaga)
 }
 
 export default mySaga
